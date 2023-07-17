@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-
+const path = require("path");
 require("dotenv").config();
 app.use(express.json());
 const dbConfig = require("./config/dbConfig");
@@ -13,17 +13,24 @@ app.use("/api/transactions", transactionsRoute);
 app.use("/api/requests", requestsRoute);
 
 const PORT = process.env.PORT || 5000;
-const path = require("path");
-__dirname = path.resolve();
-// heroku deployment
-if (process.env.NODE_ENV === "production") {
 
-  app.use(express.static("client/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-  });
+//static files
+app.use(express.static(path.join(__dirname,"./client/build")));
 
-}
+app.get("*",function(req,res){
+  res.sendFile(path.join(__dirname,"./client/build/index.html"));
+});
+
+// __dirname = path.resolve();
+// // heroku deployment
+// if (process.env.NODE_ENV === "production") {
+
+//   app.use(express.static("client/build"));
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+//   });
+
+// }
 
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);

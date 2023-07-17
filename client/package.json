@@ -45,7 +45,10 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "css-loader": "^6.8.1"
+    "autoprefixer": "^10.4.14",
+    "css-loader": "^6.8.1",
+    "css-minimizer-webpack-plugin": "^5.0.1",
+    "postcss": "^8.4.26"
   },
   "proxy": "http://localhost:5000"
 }
